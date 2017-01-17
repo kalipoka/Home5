@@ -3,12 +3,18 @@
 
 #include <iostream>
 
+using std::ostream;
+using std::cout;
+
 class complex  {
 
 public:
 	complex();
+	~complex();
 	complex(int re, int im);
-	complex conj(complex z);
+	
+	friend ostream& operator<<(ostream& os, const complex& c);
+	void print() const;
 	int re;
 	int im;
 
