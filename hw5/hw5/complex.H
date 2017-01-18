@@ -14,7 +14,7 @@ public:
 	complex(int re, int im);
 	
 	friend ostream& operator<<(ostream& os, const complex& c);
-	void print() const;
+	void print() const;  // probalby not necesry
 	int re;
 	int im;
 
