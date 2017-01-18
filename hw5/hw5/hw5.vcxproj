@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="complex.cpp" />
+    <ClCompile Include="polynom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="complex.H" />

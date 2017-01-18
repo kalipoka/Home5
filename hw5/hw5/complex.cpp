@@ -30,7 +30,7 @@ complex::~complex() {
 
 /************************************
 Function Name: complex
-Description: Constructor for the complex class. 
+Description: Copy Constructor for the complex class. 
 Parameters: int re - real part of the number
 int im - imaginary part of the number
 Return Value: -
@@ -196,6 +196,7 @@ void complex::print() const
 	}
 }
 
+/*
 int main()
 {
 	
@@ -229,4 +230,4 @@ int main()
 
 	return 0;
 }
-
+*/
