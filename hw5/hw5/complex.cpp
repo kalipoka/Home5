@@ -196,13 +196,63 @@ void complex::print() const
 	}
 }
 
+/************************************
+Function Name: InnerProduct
+Description: return the inner product result
+Parameters: complex - x,y
+Return Value: complex innerP
+*************************************/
+
+complex InnerProduct(complex x,complex y)
+{
+	complex innerP;
+	innerP = x*conj(y);
+	return innerP;
+}
+
+/************************************
+Function Name: SqNorm
+Description: returns the square norm
+Parameters: complex - x
+Return Value: complex squarenorm
+*************************************/
+complex SqNorm(complex x)
+{
+	complex Snorm;
+	Snorm = x*conj(x);
+	return Snorm;
+}
+
+/************************************
+Function Name: SqDistance;
+Description: returns the square distance
+Parameters: complex - x,y
+Return Value: complex Dist
+*************************************/
+complex SqDistance(complex x, complex y)
+{
+	int Dist;
+	complex tmp;
+	Dist = ((x.re - y.re)*(x.re - y.re) + (x.im - y.im)*(x.im - y.im));
+	tmp.re = Dist;
+	return tmp;
+}
+
 int main()
 {
 	
-	complex A,M,S,CON,Z,L,T;
+	complex A,M,S,CON,Z,L,T, inner;
+	complex inner1, SN, SN1;
+	complex R, dist;
 	complex B(1, 2);
 	complex C(2, 3);
 
+	inner1 = InnerProduct(B, C); cout << "Inner P is " << inner1 << "\n";
+	SN = SqNorm(B); cout << "norm is " << SN << "\n";
+	SN1 = SqNorm(C); cout << "norm 2 is " << SN1 << "\n";
+	dist = SqDistance(R, C); cout << "dist is " << dist << "\n";
+
+	
 	L.re = 5;
 	T.im = -1;
 
@@ -210,7 +260,7 @@ int main()
 	S = C - B;
 	M = B * C;
 	CON = conj(M);
-
+	
 	A.print(); cout << "\n";
 	M.print(); cout << "\n";
 	CON.print(); cout << "\n";
@@ -224,8 +274,7 @@ int main()
 	cout << Z; cout << "\n";
 	cout << L; cout << "\n";
 	cout << T; cout << "\n";
-
-//	cout << "z is " << A;
+	
 
 	return 0;
 }
