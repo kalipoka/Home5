@@ -6,6 +6,7 @@
 using std::ostream;
 using std::cout;
 
+
 class complex  {
 
 public:
@@ -22,6 +23,13 @@ public:
   int re_;
   int im_;
 };
+
+complex conj(complex x);
+complex InnerProduct(complex , complex);
+ostream& operator<<(ostream&, const complex& );
+complex SqNorm(complex );
+complex SqNorm(complex );
+complex SqDistance(complex, complex);
 
 #endif
 
