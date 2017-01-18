@@ -1,5 +1,7 @@
 #include <iostream>
+#include <vector> // for debug only
 #include "complex.H"
+#include "TempVec.H"
 
 using std::cout;
 
@@ -238,9 +240,22 @@ complex SqDistance(complex x, complex y)
 	return tmp;
 }
 
+
 int main()
 {
+	TempVec<int, 3> v;
+	TempVec<int, 3> b;
 	
+	v[0] = 1;
+	v[1] = 2;
+	v[2] = 4;
+	//v[4] = 5;
+
+	
+	v = v;
+
+
+	/*
 	complex A,M,S,CON,Z,L,T, inner;
 	complex inner1, SN, SN1;
 	complex R, dist;
@@ -275,7 +290,7 @@ int main()
 	cout << L; cout << "\n";
 	cout << T; cout << "\n";
 	
-
+	*/
 	return 0;
 }
 

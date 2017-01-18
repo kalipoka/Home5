@@ -27,6 +27,9 @@ public:
 complex conj(complex x);
 complex InnerProduct(complex , complex);
 ostream& operator<<(ostream&, const complex& );
+complex operator+(const complex& , const complex& );
+complex operator-(const complex& , const complex& );
+complex operator*(const complex&, const complex&);
 complex SqNorm(complex );
 complex SqNorm(complex );
 complex SqDistance(complex, complex);
