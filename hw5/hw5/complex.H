@@ -20,8 +20,8 @@ public:
 	int im;
 
  protected:
-  int re_;
-  int im_;
+ // int re_;
+//  int im_;
 };
 
 complex conj(complex x);

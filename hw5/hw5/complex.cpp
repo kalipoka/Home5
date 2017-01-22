@@ -13,8 +13,8 @@ Return Value: -
 *************************************/
 complex::complex()
 {
-	re_ = 0;
-	im_ = 0;
+	//re_ = 0;
+	//im_ = 0;
 	re = 0;
 	im = 0;
 }
@@ -37,7 +37,7 @@ Parameters: int re - real part of the number
 int im - imaginary part of the number
 Return Value: -
 *************************************/
-complex::complex(int re, int im) :re_(re), im_(im),re(re),im(im) {}
+complex::complex(int re, int im) :re(re),im(im) {}
 
 /************************************
 Function Name: conj
@@ -243,17 +243,77 @@ complex SqDistance(complex x, complex y)
 
 int main()
 {
-	TempVec<int, 3> v;
-	TempVec<int, 3> b;
+	// pairs of complex type inside tempvec checking
+	TempVec<complex, 2> v;
+	TempVec<complex, 2> b;
+	TempVec<complex, 2> c;
+	TempVec<complex, 2> d;
+	TempVec<complex, 2> e;
+	TempVec<complex, 2> f;
+	complex A(10, 1);
+	complex B(0, 0);
+	complex C(1, 1);
+	complex D(2, 2);
+	complex E(-1, 2);
+	complex G(-4, 5);
+	complex inner1, sq1,dist1;
+	complex inner2, sq2,dist2;
 	
-	v[0] = 1;
-	v[1] = 2;
-	v[2] = 4;
-	//v[4] = 5;
+	e[0] = B;
+	e[1] = B;
+	f[0] = A;
+	f[1] = A;
 
-	
-	v = v;
+	v[0] = A;
+	v[1] = B;
 
+	b[0] = C;
+	b[1] = D;
+
+	c[0] = E;
+	c[1] = G;
+ 
+	inner1 = InnerProduct(v, b);
+	inner2 = InnerProduct(b, v);
+	cout << inner1; cout << "   <-- inner p1 \n";
+	cout << inner2; cout << "   <-- inner p2\n";
+
+
+	sq1 = SqNorm(b);
+	sq2 = SqNorm(c);
+	cout << sq1; cout << "   <-- square norm 1\n";
+	cout << sq2; cout << "   <-- square norm 2 \n";
+
+	dist1 = SqDistance(e, f);
+	cout << dist1; cout << "  <-- Distance\n";
+
+
+
+	//v[2] = A;
+	cout << B; cout << "\n";  // print complex
+	b = v;
+	c = b + v;
+	cout << c << "\n";
+	d = D*c; 
+	cout << d;cout << "\n";            // print tempvec
+
+
+	// triplets of int type inside tempvec checking
+	TempVec<int, 3> i1;
+	TempVec<int, 3> i2;
+	TempVec<int, 3> i3;
+
+	i1[0] = 1;
+	i1[1] = 2;
+	i1[2] = 3;
+
+	i2 = i1;
+
+	i3 = i1 + i2;
+	cout << i3;cout << "\n";
+
+	i3 = 10 * i3;
+	cout << i3;cout << "\n";
 
 	/*
 	complex A,M,S,CON,Z,L,T, inner;
