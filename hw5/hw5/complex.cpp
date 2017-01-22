@@ -245,14 +245,19 @@ int main()
 {
 	TempVec<int, 3> v;
 	TempVec<int, 3> b;
+	TempVec<int, 3> c;
+	TempVec<int, 3> d;
 	
-	v[0] = 1;
+	v[0] = 2;
 	v[1] = 2;
-	v[2] = 4;
-	//v[4] = 5;
+	v[2] = 2;
 
-	
-	v = v;
+	//v[4] = 5;
+	b = v;
+
+	c = b + v;
+	d = 5*c;
+
 
 
 	/*
