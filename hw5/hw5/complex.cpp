@@ -352,6 +352,7 @@ int main()
 	
 	*/
 	int q = 4;
+	int w = 1;
 	return 0;
 }
 
