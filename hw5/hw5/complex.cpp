@@ -243,29 +243,77 @@ complex SqDistance(complex x, complex y)
 
 int main()
 {
-	// complex type inside tempvec checking
-	TempVec<complex, 3> v;
-	TempVec<complex, 3> b;
-	TempVec<complex, 3> c;
+	// pairs of complex type inside tempvec checking
+	TempVec<complex, 2> v;
+	TempVec<complex, 2> b;
+	TempVec<complex, 2> c;
 	TempVec<complex, 2> d;
+	TempVec<complex, 2> e;
+	TempVec<complex, 2> f;
+	complex A(10, 1);
+	complex B(0, 0);
+	complex C(1, 1);
+	complex D(2, 2);
+	complex E(-1, 2);
+	complex G(-4, 5);
+	complex inner1, sq1,dist1;
+	complex inner2, sq2,dist2;
 	
-	complex A(5, 5);
-	complex B(1, 2);
-	complex C(2, 3);
+	e[0] = B;
+	e[1] = B;
+	f[0] = A;
+	f[1] = A;
+
+	v[0] = A;
+	v[1] = B;
+
+	b[0] = C;
+	b[1] = D;
+
+	c[0] = E;
+	c[1] = G;
+ 
+	inner1 = InnerProduct(v, b);
+	inner2 = InnerProduct(b, v);
+	cout << inner1; cout << "   <-- inner p1 \n";
+	cout << inner2; cout << "   <-- inner p2\n";
 
 
-	v[0] = B;
-	v[1] = C;
-	v[2] = A;
+	sq1 = SqNorm(b);
+	sq2 = SqNorm(c);
+	cout << sq1; cout << "   <-- square norm 1\n";
+	cout << sq2; cout << "   <-- square norm 2 \n";
+
+	dist1 = SqDistance(e, f);
+	cout << dist1; cout << "  <-- Distance\n";
+
+
+
+	//v[2] = A;
 	cout << B; cout << "\n";  // print complex
-
-	//v[4] = 5;
 	b = v;
-
 	c = b + v;
-//	d = 5*c;  await answer from the forum
+	cout << c << "\n";
+	d = D*c; 
+	cout << d;cout << "\n";            // print tempvec
 
-	cout << v;            // print tempvec
+
+	// triplets of int type inside tempvec checking
+	TempVec<int, 3> i1;
+	TempVec<int, 3> i2;
+	TempVec<int, 3> i3;
+
+	i1[0] = 1;
+	i1[1] = 2;
+	i1[2] = 3;
+
+	i2 = i1;
+
+	i3 = i1 + i2;
+	cout << i3;cout << "\n";
+
+	i3 = 10 * i3;
+	cout << i3;cout << "\n";
 
 	/*
 	complex A,M,S,CON,Z,L,T, inner;

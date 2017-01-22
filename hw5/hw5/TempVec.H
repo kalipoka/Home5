@@ -18,7 +18,7 @@ class TempVec {
 	 TempVec<T, size> operator+(const TempVec<T, size>& rhs);
 	 TempVec<T, size> operator-(const TempVec<T, size>& rhs);
 	 friend ostream& operator<< <>(ostream& os, const TempVec<T, size>& c);
-	 //friend TempVec<T, size> operator*(int c, const TempVec<T, size>& rhs);
+	// friend TempVec<T, size> operator* (T c, const TempVec<T, size>& rhs);
 	 T coordinates_[size];
  protected:
 //  T coordinates_[size];
@@ -132,7 +132,7 @@ Parameters: const TempVec<T,size>& rhs
 Return Value: const TempVec<T,size> tmp;
 *************************************/
 template <class T, int size>
-TempVec<T, size> operator*(T c, const TempVec<T, size>& rhs)
+TempVec<T, size> operator* (T c, const TempVec<T, size>& rhs)
 {
 	TempVec<T, size> tmp;
 	tmp = rhs;
@@ -148,8 +148,8 @@ TempVec<T, size> operator*(T c, const TempVec<T, size>& rhs)
 
 /************************************
 Function Name: <<
-Description: print operator for complex number
-Parameters: ostream& os, const complex& c
+Description: print operator for TempVec
+Parameters: ostream& os, const TempVec<T, size>& rhs
 Return Value: ostream& os
 *************************************/
 template <class T, int size>
@@ -168,10 +168,64 @@ ostream& operator<< <>(ostream& os, const TempVec<T, size>& rhs)
 			cout << rhs.coordinates_[i] << ",";
 		
 		i++;
-
 	}
 }
 
+/************************************
+Function Name: InnerProduct
+Description: calculates the inner product of the vector
+Parameters:  const TempVec<T, size>& lhs, rhs
+Return Value: T tmp
+*************************************/
+template <class T, int size>
+T InnerProduct(const TempVec<T, size>& lhs, const TempVec<T, size>& rhs)
+{
+	T tmp;
+	int i = 0;
+	while (i < size)
+	{
+		tmp = tmp + InnerProduct(lhs.coordinates_[i], rhs.coordinates_[i]);
+		i++;
+	}
+	return tmp;
+}
 
+/************************************
+Function Name: InnerProduct
+Description: calculates the inner product of the vector
+Parameters: const TempVec<T, size>& rhs
+Return Value: T tmp
+*************************************/
+template <class T, int size>
+T SqNorm(const TempVec<T, size>& rhs)
+{
+	T tmp;
+	int i = 0;
+	while (i < size)
+	{
+		tmp = tmp + SqNorm(rhs.coordinates_[i]);
+		i++;
+	}
+	return tmp;
+}
+
+/************************************
+Function Name: InnerProduct
+Description: calculates the inner product of the vector
+Parameters:  const TempVec<T, size>& lhs, rhs
+Return Value: T tmp
+*************************************/
+template <class T, int size>
+T SqDistance(const TempVec<T, size>& lhs, const TempVec<T, size>& rhs)
+{
+	T tmp;
+	int i = 0;
+	while (i < size)
+	{
+		tmp = tmp + SqDistance(lhs.coordinates_[i], rhs.coordinates_[i]);
+		i++;
+	}
+	return tmp;
+}
 
 #endif
