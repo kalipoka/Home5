@@ -17,6 +17,7 @@ class TempVec {
 	 T& operator[](int i);
 	 TempVec<T, size> operator+(const TempVec<T, size>& rhs);
 	 TempVec<T, size> operator-(const TempVec<T, size>& rhs);
+	 friend ostream& operator<< <>(ostream& os, const TempVec<T, size>& c);
 	 //friend TempVec<T, size> operator*(int c, const TempVec<T, size>& rhs);
 	 T coordinates_[size];
  protected:
@@ -24,7 +25,7 @@ class TempVec {
 };
 
 
-// not sure yet how to implement copy const to template $$$$$$$$$$$$$$$$$$$$$
+
 /************************************
 Function Name: TempVec - copy constructor
 Description: Default Constructor for the TempVec class.
@@ -131,7 +132,7 @@ Parameters: const TempVec<T,size>& rhs
 Return Value: const TempVec<T,size> tmp;
 *************************************/
 template <class T, int size>
-TempVec<T, size> operator*(int c, const TempVec<T, size>& rhs)
+TempVec<T, size> operator*(T c, const TempVec<T, size>& rhs)
 {
 	TempVec<T, size> tmp;
 	tmp = rhs;
@@ -143,6 +144,32 @@ TempVec<T, size> operator*(int c, const TempVec<T, size>& rhs)
 		i++;
 	}
 	return tmp;
+}
+
+/************************************
+Function Name: <<
+Description: print operator for complex number
+Parameters: ostream& os, const complex& c
+Return Value: ostream& os
+*************************************/
+template <class T, int size>
+ostream& operator<< <>(ostream& os, const TempVec<T, size>& rhs)
+{
+	int i = 0;
+
+	while (i < size)
+	{
+		if (i == 0)
+			cout << "(";
+
+		if ( i== size -1)
+			return os << rhs.coordinates_[i] << ")";
+		else
+			cout << rhs.coordinates_[i] << ",";
+		
+		i++;
+
+	}
 }
 
 

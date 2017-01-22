@@ -13,8 +13,8 @@ Return Value: -
 *************************************/
 complex::complex()
 {
-	re_ = 0;
-	im_ = 0;
+	//re_ = 0;
+	//im_ = 0;
 	re = 0;
 	im = 0;
 }
@@ -37,7 +37,7 @@ Parameters: int re - real part of the number
 int im - imaginary part of the number
 Return Value: -
 *************************************/
-complex::complex(int re, int im) :re_(re), im_(im),re(re),im(im) {}
+complex::complex(int re, int im) :re(re),im(im) {}
 
 /************************************
 Function Name: conj
@@ -243,22 +243,29 @@ complex SqDistance(complex x, complex y)
 
 int main()
 {
-	TempVec<int, 3> v;
-	TempVec<int, 3> b;
-	TempVec<int, 3> c;
-	TempVec<int, 3> d;
+	// complex type inside tempvec checking
+	TempVec<complex, 3> v;
+	TempVec<complex, 3> b;
+	TempVec<complex, 3> c;
+	TempVec<complex, 2> d;
 	
-	v[0] = 2;
-	v[1] = 2;
-	v[2] = 2;
+	complex A(5, 5);
+	complex B(1, 2);
+	complex C(2, 3);
+
+
+	v[0] = B;
+	v[1] = C;
+	v[2] = A;
+	cout << B; cout << "\n";  // print complex
 
 	//v[4] = 5;
 	b = v;
 
 	c = b + v;
-	d = 5*c;
+//	d = 5*c;  await answer from the forum
 
-
+	cout << v;            // print tempvec
 
 	/*
 	complex A,M,S,CON,Z,L,T, inner;
