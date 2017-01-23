@@ -183,7 +183,7 @@ T InnerProduct(const T lhs, const T rhs)
 {
 	return InnerProduct(lhs, rhs);
 }
-
+//
 
 /************************************
 Function Name: SqNorm
