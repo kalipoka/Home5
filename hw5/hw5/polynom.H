@@ -13,7 +13,8 @@ class polynom {
 private:
 
 public:
-	polynom(int n = 0, int* coefs = NULL);
+	polynom(int n, int* coefs);
+	polynom();
 	polynom(const polynom& p);
 	~polynom();
 	int GetOrder() { return this->n_; }
