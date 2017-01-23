@@ -179,13 +179,15 @@ int main() {
       token = strtok(NULL, ",");
       rhs = atoi(token);
       cout << "<V"<<lhs<<",V"<<rhs<<"> is ";
+	  
 	  if (type == poly)
 		  cout << InnerProduct(polynom_list[lhs],polynom_list[rhs]) << endl;
+	/*
       else if(type==integer3)
 	cout << InnerProduct(int3_list[lhs],int3_list[rhs]) << endl;
       else 
 	cout << InnerProduct(complex2_list[lhs],complex2_list[rhs]) << endl;
-      
+      */
     }
     if (!strcmp(param_name, "SquaredNorm")) {
       int vec;
@@ -198,6 +200,7 @@ int main() {
 	cout << SqNorm(int3_list[vec]) << endl;
       else 
 	cout << SqNorm(complex2_list[vec]) << endl;
+
     }
     if (!strcmp(param_name, "SquaredDistance")) {
       int lhs,rhs;
@@ -208,10 +211,12 @@ int main() {
       cout << "d^2(V"<<lhs<<",V"<<rhs<<") is ";
       if(type==poly)
 	cout << SqDistance(polynom_list[lhs],polynom_list[rhs]) << endl;
+	  /*
       else if(type==integer3)
 	cout << SqDistance(int3_list[lhs],int3_list[rhs]) << endl;
       else 
 	cout << SqDistance(complex2_list[lhs],complex2_list[rhs]) << endl;
+	*/
     }
   }
   

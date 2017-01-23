@@ -179,9 +179,16 @@ Parameters:  const TempVec<T, size>& lhs, rhs
 Return Value: T tmp
 *************************************/
 template <class T, int size>
-T InnerProduct(const T lhs, const T rhs)
+T InnerProduct(const TempVec<T, size>& lhs, const TempVec<T, size>& rhs)
 {
-	return InnerProduct(lhs, rhs);
+	T tmp;
+	int i = 0;
+	while (i < size)
+	{
+		tmp = tmp + InnerProduct(lhs.coordinates_[i], rhs.coordinates_[i]);
+		i++;
+	}
+	return tmp;
 }
 
 
