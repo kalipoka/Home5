@@ -253,10 +253,10 @@ int SqDistance(int x, int y)
 	return (x - y)*(x - y);
 }
 
-
+/*
 int main()
 {
-	/*
+	
 	// pairs of complex type inside tempvec checking
 	TempVec<complex, 2> v;
 	TempVec<complex, 2> b;
@@ -317,7 +317,7 @@ int main()
 	cout << c << "\n";
 	d = D*c; 
 	cout << d;cout << "\n";            // print tempvec
-	*/
+	
 
 	// triplets of int type inside tempvec checking
 	
@@ -349,7 +349,7 @@ int main()
 
 	sq = SqDistance(i1, i3);
 	cout << sq << " <--- sq dist\n";
-
+	*/
 	/*
 	complex A,M,S,CON,Z,L,T, inner;
 	complex inner1, SN, SN1;
@@ -390,6 +390,7 @@ int main()
 	int w = 1;
 	
 	return 0;
-	*/
+	
 }
 
+*/

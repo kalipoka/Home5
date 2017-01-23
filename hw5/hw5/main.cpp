@@ -11,7 +11,7 @@ const int MAXLINE = 256;
 typedef enum {NONE, poly, integer3, complex2} VectorSpaceType;
 typedef TempVec<int,3> Integer3;
 typedef TempVec<complex,2> Complex2;
-/*
+
 int main() {
   
   unsigned int size=0;
@@ -222,4 +222,3 @@ int main() {
   if(complex2_list) delete[] complex2_list;
   return 0;
 }
-*/
