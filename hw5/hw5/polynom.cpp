@@ -1,7 +1,7 @@
 #include "polynom.h"
 #include <string>
 #include <iostream>
-
+#include "TempVec.H"
 
 
 /************************************
@@ -25,7 +25,7 @@ Return Value: -
 *************************************/
 polynom::~polynom()
 {
-	delete[n_-1] coefs_;
+	delete[n_ - 1] coefs_;
 }
 
 /************************************
@@ -42,15 +42,15 @@ polynom::polynom(const polynom& p)
 /************************************
 Function Name: GetCoefs
 Description: Returns a copy of the coefficients list.
-Parameters: - 
+Parameters: -
 Return Value: coefs - a pointer to the list
 *************************************/
-int* polynom::GetCoefs() const 
+int* polynom::GetCoefs() const
 {
 	int* coefs;
 	if (!coefs_)
 		return NULL;
-	coefs = new int[n_+ 1];
+	coefs = new int[n_ + 1];
 	for (int i = 0; i <= n_; i++)
 		coefs[i] = coefs_[i];
 	return coefs;
@@ -90,7 +90,7 @@ polynom operator*(const int j, polynom& p)
 
 /************************************
 Function Name: -
-Description: Returns a polynom that is substructed by two polynoms
+Description: Returns a polynom that is a substruction of two polynoms
 Parameters: polynom& p - The first polynom
 polynom& q - The second polynom
 Return Value: A substructed polynom
@@ -104,6 +104,24 @@ polynom operator-(polynom& p, polynom& q)
 	polynom r(p.GetOrder(), coefs);
 	return r;
 }
+
+/************************************
+Function Name: +
+Description: Returns a polynom that is a sum of two polynoms
+Parameters: polynom& p - The first polynom
+polynom& q - The second polynom
+Return Value: A substructed polynom
+*************************************/
+polynom operator+(polynom& p, polynom& q)
+{
+	int* coefs = p.GetCoefs(); //we need plus one for the free variable
+	for (int i = 0; i <= q.GetOrder(); i++)
+		coefs[i] = coefs[i] + q.coefs_[i];
+
+	polynom r(p.GetOrder(), coefs);
+	return r;
+}
+
 
 /************************************
 Function Name: <<
@@ -120,7 +138,7 @@ ostream& operator<<(ostream& os, const polynom& p)
 	for (; 2 <= i; i--)
 	{
 		s = s + to_string(p.coefs_[i]) + "x^" + to_string(i);
-		if (p.coefs_[i-1] >= 0)
+		if (p.coefs_[i - 1] >= 0)
 			s = s + "+";
 	}
 
@@ -145,11 +163,11 @@ Return Value: An integer with the result
 *************************************/
 int InnerProduct(polynom& p, polynom& q)
 {
-	float calc=.0;
+	float calc = .0;
 	for (int i = p.GetOrder(); 0 <= i; i--)
 		for (int j = q.GetOrder(); 0 <= j; j--) {
 			calc = calc + (static_cast<float>(p.coefs_[i]) * static_cast<float>(q.coefs_[j])) / (i + j + 1);
-			cout << calc << "\n"; 
+			cout << calc << "\n";
 		}
 	return calc;
 }
@@ -183,29 +201,43 @@ int SqDistance(polynom& p, polynom& q)
 /*
 int main()
 {
-	int* coefs;
-	coefs = new int[3]{ 1,8,1};// ({ a0, a1, a2 });
-	polynom q(2, coefs);
+int* coefs1;
+coefs1 = new int[3]{ 1,8,1};// ({ a0, a1, a2 });
+polynom p1(2, coefs1);
 
-	int* coefs2;
-	coefs2 = new int[4]{-1,0,0,50};// ({ 1, 1, 1 });
-	polynom p(3, coefs2);
-	//polynom p = q;
+int* coefs2;
+coefs2 = new int[4]{-1,0,0,50};// ({ 1, 1, 1 });
+polynom p2(3, coefs2);
 
-	//cout << q-p << "\n";
-	//cout << -2*p << "\n";		
+int* coefs3;
+coefs3 = new int[3]{ 1,8,1 };// ({ a0, a1, a2 });
+polynom p3(2, coefs3);
 
-	//
-	//int* coefs1;
-	//coefs = new int[6];
-	//coefs1 = q.GetCoefs();
-	//for (int i = 0; i != 6; i++)
-	//	cout << coefs1[i] << " ";
-	//
+int* coefs4;
+coefs4 = new int[4]{ -1,0,0,50 };// ({ 1, 1, 1 });
+polynom p4(3, coefs4);
 
 
-	cout << SqDistance(p,q) << "\n";
 
-	return 0;
+TempVec<polynom, 2> v1;
+TempVec<polynom, 2> v2;
+TempVec<polynom, 2> v3;
+TempVec<polynom, 2> v4;
+
+v1[0] = p1;
+v1[1] = p2;
+v2[0] = p3;
+v2[1] = p4;
+
+
+v3[1] = v2[0];
+v3[0] = v2[1];
+
+//v4 = v1 + v2;
+
+
+cout <<v1 << "\n";
+
+return 0;
 }
 */

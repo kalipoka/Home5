@@ -11,6 +11,7 @@ const int MAXLINE = 256;
 typedef enum {NONE, poly, integer3, complex2} VectorSpaceType;
 typedef TempVec<int,3> Integer3;
 typedef TempVec<complex,2> Complex2;
+/*
 int main() {
   
   unsigned int size=0;
@@ -209,7 +210,7 @@ int main() {
       cout << "d^2(V"<<lhs<<",V"<<rhs<<") is ";
       if(type==poly)
 	cout << SqDistance(polynom_list[lhs],polynom_list[rhs]) << endl;
-      else if(type==integer3)
+     else if(type==integer3)
 	cout << SqDistance(int3_list[lhs],int3_list[rhs]) << endl;
       else 
 	cout << SqDistance(complex2_list[lhs],complex2_list[rhs]) << endl;
@@ -221,3 +222,4 @@ int main() {
   if(complex2_list) delete[] complex2_list;
   return 0;
 }
+*/

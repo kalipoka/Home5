@@ -34,5 +34,11 @@ complex SqNorm(complex );
 complex SqNorm(complex );
 complex SqDistance(complex, complex);
 
+
+int InnerProduct(int, int);
+int SqNorm(int);
+int SqDistance(int,int);
+
+
 #endif
 
