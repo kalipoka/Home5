@@ -2,7 +2,8 @@
 #define _TEMPVEC_H
 
 #include <iostream>
-#include "complex.H"
+//#include "complex.H"
+//#include "polynom.H"
 
 using namespace std;
 
@@ -178,21 +179,15 @@ Parameters:  const TempVec<T, size>& lhs, rhs
 Return Value: T tmp
 *************************************/
 template <class T, int size>
-T InnerProduct(const TempVec<T, size>& lhs, const TempVec<T, size>& rhs)
+T InnerProduct(const T lhs, const T rhs)
 {
-	T tmp;
-	int i = 0;
-	while (i < size)
-	{
-		tmp = tmp + InnerProduct(lhs.coordinates_[i], rhs.coordinates_[i]);
-		i++;
-	}
-	return tmp;
+	return InnerProduct(lhs, rhs);
 }
 
+
 /************************************
-Function Name: InnerProduct
-Description: calculates the inner product of the vector
+Function Name: SqNorm
+Description: calculates the squre norm of the vector
 Parameters: const TempVec<T, size>& rhs
 Return Value: T tmp
 *************************************/
@@ -210,8 +205,8 @@ T SqNorm(const TempVec<T, size>& rhs)
 }
 
 /************************************
-Function Name: InnerProduct
-Description: calculates the inner product of the vector
+Function Name: SqDistance
+Description: calculates the distance between two vector
 Parameters:  const TempVec<T, size>& lhs, rhs
 Return Value: T tmp
 *************************************/

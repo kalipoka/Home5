@@ -13,9 +13,8 @@ typedef TempVec<int,3> Integer3;
 typedef TempVec<complex,2> Complex2;
 int main() {
   
-  unsigned int size=0;
+  int size=0;
   VectorSpaceType type = NONE;
-  int* IntList=NULL;
   Integer3* int3_list=NULL;
   Complex2* complex2_list=NULL;
   polynom* polynom_list=NULL;
@@ -180,8 +179,8 @@ int main() {
       token = strtok(NULL, ",");
       rhs = atoi(token);
       cout << "<V"<<lhs<<",V"<<rhs<<"> is ";
-      if(type==poly)
-	cout << InnerProduct(polynom_list[lhs],polynom_list[rhs]) << endl;
+	  if (type == poly)
+		  cout << InnerProduct(polynom_list[lhs],polynom_list[rhs]) << endl;
       else if(type==integer3)
 	cout << InnerProduct(int3_list[lhs],int3_list[rhs]) << endl;
       else 

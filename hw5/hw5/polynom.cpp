@@ -1,7 +1,7 @@
 #include "polynom.h"
 #include <string>
 #include <iostream>
-
+#include "TempVec.H"
 
 
 /************************************
@@ -90,7 +90,7 @@ polynom operator*(const int j, polynom& p)
 
 /************************************
 Function Name: -
-Description: Returns a polynom that is substructed by two polynoms
+Description: Returns a polynom that is a substruction of two polynoms
 Parameters: polynom& p - The first polynom
 polynom& q - The second polynom
 Return Value: A substructed polynom
@@ -104,6 +104,24 @@ polynom operator-(polynom& p, polynom& q)
 	polynom r(p.GetOrder(), coefs);
 	return r;
 }
+
+/************************************
+Function Name: +
+Description: Returns a polynom that is a sum of two polynoms
+Parameters: polynom& p - The first polynom
+polynom& q - The second polynom
+Return Value: A substructed polynom
+*************************************/
+polynom operator+(polynom& p, polynom& q)
+{
+	int* coefs = p.GetCoefs(); //we need plus one for the free variable
+	for (int i = 0; i <= q.GetOrder(); i++)
+		coefs[i] = coefs[i] + q.coefs_[i];
+
+	polynom r(p.GetOrder(), coefs);
+	return r;
+}
+
 
 /************************************
 Function Name: <<
@@ -183,28 +201,42 @@ int SqDistance(polynom& p, polynom& q)
 /*
 int main()
 {
-	int* coefs;
-	coefs = new int[3]{ 1,8,1};// ({ a0, a1, a2 });
-	polynom q(2, coefs);
+	int* coefs1;
+	coefs1 = new int[3]{ 1,8,1};// ({ a0, a1, a2 });
+	polynom p1(2, coefs1);
 
 	int* coefs2;
 	coefs2 = new int[4]{-1,0,0,50};// ({ 1, 1, 1 });
-	polynom p(3, coefs2);
-	//polynom p = q;
+	polynom p2(3, coefs2);
 
-	//cout << q-p << "\n";
-	//cout << -2*p << "\n";		
+	int* coefs3;
+	coefs3 = new int[3]{ 1,8,1 };// ({ a0, a1, a2 });
+	polynom p3(2, coefs3);
 
-	//
-	//int* coefs1;
-	//coefs = new int[6];
-	//coefs1 = q.GetCoefs();
-	//for (int i = 0; i != 6; i++)
-	//	cout << coefs1[i] << " ";
-	//
+	int* coefs4;
+	coefs4 = new int[4]{ -1,0,0,50 };// ({ 1, 1, 1 });
+	polynom p4(3, coefs4);
 
 
-	cout << SqDistance(p,q) << "\n";
+
+	TempVec<polynom, 2> v1;
+	TempVec<polynom, 2> v2;
+	TempVec<polynom, 2> v3;
+	TempVec<polynom, 2> v4;
+	
+	v1[0] = p1;
+	v1[1] = p2;
+	v2[0] = p3;
+	v2[1] = p4;
+
+
+	v3[1] = v2[0];
+	v3[0] = v2[1];
+
+	//v4 = v1 + v2;
+
+
+	cout <<v1 << "\n";
 
 	return 0;
 }

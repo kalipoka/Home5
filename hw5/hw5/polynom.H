@@ -21,17 +21,18 @@ public:
   polynom& operator=(const polynom& p);
   friend polynom operator*(const int i, polynom& a);
   friend polynom operator-(polynom& p, polynom& q);
+  friend polynom operator+(polynom& p, polynom& q);
   friend ostream& operator<<(ostream& os, const polynom&);
-  friend int InnerProduct(polynom& p, polynom& q); // from 1 to 0
-  friend int SqNorm(polynom& p);
-  friend int SqDistance(polynom& p, polynom& q);
+  friend int InnerProduct(polynom& p, polynom& q);
 
  protected:
   int n_; //number of 
   int* coefs_;
 };
 
-
+polynom operator*(const int i, polynom& a);
+polynom operator-(polynom& p, polynom& q);
+polynom operator+(polynom& p, polynom& q);
 int InnerProduct(polynom& p, polynom& q); // from 1 to 0
 int SqNorm(polynom& p);
 int SqDistance(polynom& p, polynom& q);
