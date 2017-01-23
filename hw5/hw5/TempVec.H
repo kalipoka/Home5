@@ -2,8 +2,7 @@
 #define _TEMPVEC_H
 
 #include <iostream>
-//#include "complex.H"
-//#include "polynom.H"
+#include "complex.H"
 
 using namespace std;
 
@@ -25,8 +24,6 @@ class TempVec {
 //  T coordinates_[size];
 };
 
-
-
 /************************************
 Function Name: TempVec - copy constructor
 Description: Default Constructor for the TempVec class.
@@ -43,7 +40,29 @@ TempVec<T, size>::TempVec(const TempVec<T,size>& rhs)
 	}
 }
 
-
+/*
+template <class T, int size>
+int InnerProduct(int x, int y)
+{
+	int innerP;
+	innerP = x*y;
+	return innerP;
+}
+template <class T, int size>
+int SqNorm(int x)
+{
+	int Snorm;
+	Snorm = x*x;
+	return Snorm;
+}
+template <class T, int size>
+int SqDistance(int x, int y)
+{
+	int Dist;
+	Dist = ((x - y)*(x - y));
+	return Dist;
+}
+*/
 /************************************
 Function Name:  operator []
 Description: Operator for putting values inside the vector;
@@ -54,9 +73,11 @@ Return Value: -
 template <class T, int size>
 T& TempVec<T, size>::operator[](int i)
 {
+	//T tmp;
 	if ( i < 0 || i >(size - 1) ) 
 	{
-		throw("Error TempVec. Illegal index");
+		throw("Errr TempVec. Illegal index");
+		//return tmp;
 	}
 	return coordinates_[i];
 }
@@ -178,11 +199,12 @@ Description: calculates the inner product of the vector
 Parameters:  const TempVec<T, size>& lhs, rhs
 Return Value: T tmp
 *************************************/
+
 template <class T, int size>
 T InnerProduct(const TempVec<T, size>& lhs, const TempVec<T, size>& rhs)
 {
-	T tmp;
-	int i = 0;
+	T tmp = InnerProduct(lhs.coordinates_[0], rhs.coordinates_[0]);
+	int i = 1;
 	while (i < size)
 	{
 		tmp = tmp + InnerProduct(lhs.coordinates_[i], rhs.coordinates_[i]);
@@ -194,15 +216,16 @@ T InnerProduct(const TempVec<T, size>& lhs, const TempVec<T, size>& rhs)
 
 /************************************
 Function Name: SqNorm
-Description: calculates the squre norm of the vector
+Description: calculates the square norm of the vector
 Parameters: const TempVec<T, size>& rhs
 Return Value: T tmp
 *************************************/
+
 template <class T, int size>
 T SqNorm(const TempVec<T, size>& rhs)
 {
-	T tmp;
-	int i = 0;
+	T tmp = SqNorm(rhs.coordinates_[0]);
+	int i = 1;
 	while (i < size)
 	{
 		tmp = tmp + SqNorm(rhs.coordinates_[i]);
@@ -213,14 +236,15 @@ T SqNorm(const TempVec<T, size>& rhs)
 
 /************************************
 Function Name: SqDistance
-Description: calculates the distance between two vector
+Description: calculates the square distance  of the vector
 Parameters:  const TempVec<T, size>& lhs, rhs
 Return Value: T tmp
 *************************************/
+
 template <class T, int size>
 T SqDistance(const TempVec<T, size>& lhs, const TempVec<T, size>& rhs)
 {
-	T tmp;
+	T tmp = SqDistance(lhs.coordinates_[0], rhs.coordinates_[0]);
 	int i = 0;
 	while (i < size)
 	{

@@ -112,7 +112,7 @@ ostream& operator<<(ostream& os, const complex& c)
 		}
 		if ( c.im > 0)
 		{
-			return os  << c.im << "i"; 
+			return os << "+" << c.im << "i"; 
 		}
 		else
 		{
@@ -137,6 +137,63 @@ ostream& operator<<(ostream& os, const complex& c)
 		else
 		{
 			return os << c.re << c.im << "i";
+		}
+	}
+}
+/************************************
+Function Name: print
+Description: prints the complex number
+Parameters: -
+Return Value: -
+*************************************/
+void complex::print() const
+{
+	if ((re == 0) && (im == 0))
+	{
+		cout << "0"; return;
+	}
+	if (im == 0)
+	{
+		cout << re; return;
+	}
+	if (re == 0)
+	{
+		if (im == 1)
+		{
+			cout << "i"; return;
+		}
+		if (im == -1)
+		{
+			cout << "-i"; return;
+		}
+		if (im > 0)
+		{
+			cout << "+" << im << "i"; return;
+		}
+		else
+		{
+			cout << im << "i"; return;
+		}
+	}
+	else
+	{
+		cout << re;
+		if (im == 1)
+		{
+			cout << "+i";
+		}
+		if (im == -1)
+		{
+			cout << "-i"; return;
+		}
+		if (im > 0)
+		{
+			cout << "+" << im << "i"; return;
+		}
+
+		else
+		{
+			cout << im << "i"; return;
 		}
 	}
 }
@@ -183,9 +240,23 @@ complex SqDistance(complex x, complex y)
 	return tmp;
 }
 
+int InnerProduct(int x, int y)
+{
+	return x*y;
+}
+int SqNorm(int x)
+{
+	return x*x;
+}
+int SqDistance(int x, int y)
+{
+	return (x - y)*(x - y);
+}
+
 /*
 int main()
 {
+	
 	// pairs of complex type inside tempvec checking
 	TempVec<complex, 2> v;
 	TempVec<complex, 2> b;
@@ -202,8 +273,15 @@ int main()
 	complex inner1, sq1,dist1;
 	complex inner2, sq2,dist2;
 	
-	e[0] = B;
-	e[1] = B;
+	try {
+		e[0] = B;
+		e[1] = B;
+		//e[2] = B;
+	}
+	catch (string str) {cout << "Error";}
+	
+		
+
 	f[0] = A;
 	f[1] = A;
 
@@ -221,7 +299,7 @@ int main()
 	cout << inner1; cout << "   <-- inner p1 \n";
 	cout << inner2; cout << "   <-- inner p2\n";
 
-
+	
 	sq1 = SqNorm(b);
 	sq2 = SqNorm(c);
 	cout << sq1; cout << "   <-- square norm 1\n";
@@ -231,7 +309,7 @@ int main()
 	cout << dist1; cout << "  <-- Distance\n";
 
 
-
+	
 	//v[2] = A;
 	cout << B; cout << "\n";  // print complex
 	b = v;
@@ -239,26 +317,40 @@ int main()
 	cout << c << "\n";
 	d = D*c; 
 	cout << d;cout << "\n";            // print tempvec
-
+	
 
 	// triplets of int type inside tempvec checking
+	
 	TempVec<int, 3> i1;
 	TempVec<int, 3> i2;
 	TempVec<int, 3> i3;
-
+	int inner1,sq,norm;
 	i1[0] = 1;
 	i1[1] = 2;
 	i1[2] = 3;
 
+	i3[0] = 2;
+	i3[1] = 4;
+	i3[2] = 5;
+
 	i2 = i1;
 
+	inner1 = InnerProduct(i1, i2);
+	cout << inner1 << " <--- inner p\n";
 	i3 = i1 + i2;
 	cout << i3;cout << "\n";
 
 	i3 = 10 * i3;
 	cout << i3;cout << "\n";
 
-	
+	norm = SqNorm(i3);
+	cout << norm << " <--- norm\n";
+
+
+	sq = SqDistance(i1, i3);
+	cout << sq << " <--- sq dist\n";
+	*/
+	/*
 	complex A,M,S,CON,Z,L,T, inner;
 	complex inner1, SN, SN1;
 	complex R, dist;
@@ -293,8 +385,12 @@ int main()
 	cout << L; cout << "\n";
 	cout << T; cout << "\n";
 	
-	
+
 	int q = 4;
+	int w = 1;
+	
 	return 0;
+	
 }
+
 */

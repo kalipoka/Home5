@@ -9,9 +9,9 @@ using namespace std;
 
 // first number is the size of the polynom and then the numbers
 
-class polynom  {
+class polynom {
 private:
-	
+
 public:
 	polynom(int n, int* coefs);
 	polynom();
@@ -26,7 +26,7 @@ public:
 	friend ostream& operator<<(ostream& os, const polynom&);
 	friend int InnerProduct(polynom& p, polynom& q);
 
- protected:
+protected:
 	int n_; //number of 
 	int* coefs_;
 };
@@ -38,4 +38,4 @@ int InnerProduct(polynom& p, polynom& q); // from 1 to 0
 int SqNorm(polynom& p);
 int SqDistance(polynom& p, polynom& q);
 #endif
- 
+

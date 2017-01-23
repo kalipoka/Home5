@@ -61,15 +61,15 @@ polynom::polynom(const polynom& p)
 /************************************
 Function Name: GetCoefs
 Description: Returns a copy of the coefficients list.
-Parameters: - 
+Parameters: -
 Return Value: coefs - a pointer to the list
 *************************************/
-int* polynom::GetCoefs() const 
+int* polynom::GetCoefs() const
 {
 	int* coefs;
 	if (!coefs_)
 		return NULL;
-	coefs = new int[n_+ 1];
+	coefs = new int[n_ + 1];
 	for (int i = 0; i <= n_; i++)
 		coefs[i] = coefs_[i];
 	return coefs;
@@ -165,8 +165,8 @@ ostream& operator<<(ostream& os, const polynom& p)
 			else
 				s = s + to_string(p.coefs_[i]) + "x^" + to_string(i);
 
-			int j = i-1;
-			while  (j-- >= 0)
+			int j = i - 1;
+			while (j-- >= 0)
 				if (p.coefs_[j] >= 0)
 				{
 					s = s + "+";
@@ -178,14 +178,14 @@ ostream& operator<<(ostream& os, const polynom& p)
 	if (i == 1) {
 		if (p.coefs_[i] != 0)
 		{
-			if (p.coefs_[i] != 1 && p.coefs_[i] != -1 )
+			if (p.coefs_[i] != 1 && p.coefs_[i] != -1)
 				s = s + to_string(p.coefs_[i]) + "x";
 			else
 				if (p.coefs_[i] == -1)
 					s = s + "-x";
 				else
 					s = s + "x";
-			
+
 			if (p.coefs_[i - 1] > 0)
 				s = s + "+";
 		}
@@ -207,7 +207,7 @@ Return Value: An integer with the result
 *************************************/
 int InnerProduct(polynom& p, polynom& q)
 {
-	float calc=.0;
+	float calc = .0;
 	for (int i = p.GetOrder(); 0 <= i; i--)
 		for (int j = q.GetOrder(); 0 <= j; j--) {
 			calc = calc + (static_cast<float>(p.coefs_[i]) * static_cast<float>(q.coefs_[j])) / (i + j + 1);
@@ -244,43 +244,43 @@ int SqDistance(polynom& p, polynom& q)
 /*
 int main()
 {
-	int* coefs1;
-	coefs1 = new int[3]{ 1,8,1};// ({ a0, a1, a2 });
-	polynom p1(2, coefs1);
+int* coefs1;
+coefs1 = new int[3]{ 1,8,1};// ({ a0, a1, a2 });
+polynom p1(2, coefs1);
 
-	int* coefs2;
-	coefs2 = new int[4]{-1,0,0,50};// ({ 1, 1, 1 });
-	polynom p2(3, coefs2);
+int* coefs2;
+coefs2 = new int[4]{-1,0,0,50};// ({ 1, 1, 1 });
+polynom p2(3, coefs2);
 
-	int* coefs3;
-	coefs3 = new int[3]{ 1,8,1 };// ({ a0, a1, a2 });
-	polynom p3(2, coefs3);
+int* coefs3;
+coefs3 = new int[3]{ 1,8,1 };// ({ a0, a1, a2 });
+polynom p3(2, coefs3);
 
-	int* coefs4;
-	coefs4 = new int[4]{ -1,0,0,50 };// ({ 1, 1, 1 });
-	polynom p4(3, coefs4);
-
-
-
-	TempVec<polynom, 2> v1;
-	TempVec<polynom, 2> v2;
-	TempVec<polynom, 2> v3;
-	TempVec<polynom, 2> v4;
-	
-	v1[0] = p1;
-	v1[1] = p2;
-	v2[0] = p3;
-	v2[1] = p4;
+int* coefs4;
+coefs4 = new int[4]{ -1,0,0,50 };// ({ 1, 1, 1 });
+polynom p4(3, coefs4);
 
 
-	v3[1] = v2[0];
-	v3[0] = v2[1];
 
-	//v4 = v1 + v2;
+TempVec<polynom, 2> v1;
+TempVec<polynom, 2> v2;
+TempVec<polynom, 2> v3;
+TempVec<polynom, 2> v4;
+
+v1[0] = p1;
+v1[1] = p2;
+v2[0] = p3;
+v2[1] = p4;
 
 
-	cout <<v1 << "\n";
+v3[1] = v2[0];
+v3[0] = v2[1];
 
-	return 0;
+//v4 = v1 + v2;
+
+
+cout <<v1 << "\n";
+
+return 0;
 }
 */
