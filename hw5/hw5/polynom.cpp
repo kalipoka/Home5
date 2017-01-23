@@ -11,9 +11,28 @@ Parameters: int n - oreder of the polynom
 int* coefs - the list of coefficients
 Return Value: -
 *************************************/
-polynom::polynom(int n, int* coefs)
+polynom::polynom()
 {
-	coefs_ = coefs;
+	coefs_ = NULL;
+	n_ = 0;
+}
+
+/************************************
+Function Name: polynom
+Description: Default Constructor for the polynom class.
+Parameters: int n - oreder of the polynom
+int* coefs - the list of coefficients
+Return Value: -
+*************************************/
+polynom::polynom(int n = 0, int* coefs = NULL)
+{
+	//coefs_ = coefs;
+	coefs_ = new int[n + 1];
+	if (coefs) {
+		new int[n + 1];
+		for (int i = 0; i <= n; i++)
+			coefs_[i] = coefs[i];
+	}
 	n_ = n;
 }
 
@@ -25,7 +44,7 @@ Return Value: -
 *************************************/
 polynom::~polynom()
 {
-	delete[n_-1] coefs_;
+	delete[n_] coefs_;
 }
 
 /************************************
@@ -137,18 +156,43 @@ ostream& operator<<(ostream& os, const polynom& p)
 	//if (p.coefs_) return os;
 	for (; 2 <= i; i--)
 	{
-		s = s + to_string(p.coefs_[i]) + "x^" + to_string(i);
-		if (p.coefs_[i-1] >= 0)
-			s = s + "+";
+		if (p.coefs_[i] != 0)
+		{
+			if (p.coefs_[i] == 1)
+				s = s + "x^" + to_string(i);
+			else if (p.coefs_[i] == -1)
+				s = s + "x^" + to_string(i);
+			else
+				s = s + to_string(p.coefs_[i]) + "x^" + to_string(i);
+
+			int j = i-1;
+			while  (j-- >= 0)
+				if (p.coefs_[j] >= 0)
+				{
+					s = s + "+";
+					break;
+				}
+		}
 	}
 
 	if (i == 1) {
-		s = s + to_string(p.coefs_[i]) + "x";
-		if (p.coefs_[i - 1] >= 0)
-			s = s + "+";
+		if (p.coefs_[i] != 0)
+		{
+			if (p.coefs_[i] != 1 && p.coefs_[i] != -1 )
+				s = s + to_string(p.coefs_[i]) + "x";
+			else
+				if (p.coefs_[i] == -1)
+					s = s + "-x";
+				else
+					s = s + "x";
+			
+			if (p.coefs_[i - 1] > 0)
+				s = s + "+";
+		}
 		i--;
 	}
-	s = s + to_string(p.coefs_[i]);
+	if (p.coefs_[i] != 0)
+		s = s + to_string(p.coefs_[i]);
 
 	os << s;
 	return os;
@@ -167,7 +211,6 @@ int InnerProduct(polynom& p, polynom& q)
 	for (int i = p.GetOrder(); 0 <= i; i--)
 		for (int j = q.GetOrder(); 0 <= j; j--) {
 			calc = calc + (static_cast<float>(p.coefs_[i]) * static_cast<float>(q.coefs_[j])) / (i + j + 1);
-			cout << calc << "\n"; 
 		}
 	return calc;
 }
