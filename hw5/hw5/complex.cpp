@@ -112,7 +112,7 @@ ostream& operator<<(ostream& os, const complex& c)
 		}
 		if ( c.im > 0)
 		{
-			return os << "+" << c.im << "i"; 
+			return os  << c.im << "i"; 
 		}
 		else
 		{
@@ -137,63 +137,6 @@ ostream& operator<<(ostream& os, const complex& c)
 		else
 		{
 			return os << c.re << c.im << "i";
-		}
-	}
-}
-/************************************
-Function Name: print
-Description: prints the complex number
-Parameters: -
-Return Value: -
-*************************************/
-void complex::print() const
-{
-	if ((re == 0) && (im == 0))
-	{
-		cout << "0"; return;
-	}
-	if (im == 0)
-	{
-		cout << re; return;
-	}
-	if (re == 0)
-	{
-		if (im == 1)
-		{
-			cout << "i"; return;
-		}
-		if (im == -1)
-		{
-			cout << "-i"; return;
-		}
-		if (im > 0)
-		{
-			cout << "+" << im << "i"; return;
-		}
-		else
-		{
-			cout << im << "i"; return;
-		}
-	}
-	else
-	{
-		cout << re;
-		if (im == 1)
-		{
-			cout << "+i";
-		}
-		if (im == -1)
-		{
-			cout << "-i"; return;
-		}
-		if (im > 0)
-		{
-			cout << "+" << im << "i"; return;
-		}
-
-		else
-		{
-			cout << im << "i"; return;
 		}
 	}
 }

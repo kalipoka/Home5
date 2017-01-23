@@ -185,9 +185,10 @@ int main() {
 	/*
       else if(type==integer3)
 	cout << InnerProduct(int3_list[lhs],int3_list[rhs]) << endl;
+	*/
       else 
 	cout << InnerProduct(complex2_list[lhs],complex2_list[rhs]) << endl;
-      */
+  
     }
     if (!strcmp(param_name, "SquaredNorm")) {
       int vec;
@@ -197,8 +198,10 @@ int main() {
       if(type==poly)
 	cout << SqNorm(polynom_list[vec]) << endl;
       else if(type==integer3)
+		  /*
 	cout << SqNorm(int3_list[vec]) << endl;
-      else 
+     else 
+	  */ 
 	cout << SqNorm(complex2_list[vec]) << endl;
 
     }
@@ -214,9 +217,10 @@ int main() {
 	  /*
       else if(type==integer3)
 	cout << SqDistance(int3_list[lhs],int3_list[rhs]) << endl;
+	*/
       else 
 	cout << SqDistance(complex2_list[lhs],complex2_list[rhs]) << endl;
-	*/
+	
     }
   }
   
