@@ -53,9 +53,11 @@ Return Value: -
 template <class T, int size>
 T& TempVec<T, size>::operator[](int i)
 {
+	//T tmp;
 	if ( i < 0 || i >(size - 1) ) 
 	{
-		throw("Error TempVec. Illegal index");
+		throw("Errr TempVec. Illegal index");
+		//return tmp;
 	}
 	return coordinates_[i];
 }

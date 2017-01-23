@@ -240,7 +240,7 @@ complex SqDistance(complex x, complex y)
 	return tmp;
 }
 
-
+/*
 int main()
 {
 	// pairs of complex type inside tempvec checking
@@ -259,8 +259,15 @@ int main()
 	complex inner1, sq1,dist1;
 	complex inner2, sq2,dist2;
 	
-	e[0] = B;
-	e[1] = B;
+	try {
+		e[0] = B;
+		e[1] = B;
+		e[2] = B;
+	}
+	catch (string str) {cout << "Error";}
+	
+		
+
 	f[0] = A;
 	f[1] = A;
 
@@ -315,7 +322,7 @@ int main()
 	i3 = 10 * i3;
 	cout << i3;cout << "\n";
 
-	/*
+	
 	complex A,M,S,CON,Z,L,T, inner;
 	complex inner1, SN, SN1;
 	complex R, dist;
@@ -350,9 +357,9 @@ int main()
 	cout << L; cout << "\n";
 	cout << T; cout << "\n";
 	
-	*/
+
 	int q = 4;
 	int w = 1;
 	return 0;
 }
-
+*/
