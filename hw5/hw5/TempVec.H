@@ -2,7 +2,7 @@
 #define _TEMPVEC_H
 
 #include <iostream>
-#include "complex.H"
+//#include "complex.H"
 
 using namespace std;
 
@@ -102,6 +102,7 @@ TempVec<T, size>& TempVec<T, size>::operator=(const TempVec<T,size>& rhs)
 		coordinates_[i] = rhs.coordinates_[i];
 		i++;
 	}
+	return *this;
 }
 
 
@@ -191,6 +192,7 @@ ostream& operator<< <>(ostream& os, const TempVec<T, size>& rhs)
 		
 		i++;
 	}
+	return os;
 }
 
 /************************************

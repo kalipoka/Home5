@@ -83,11 +83,12 @@ Return Value: The reference to the assigned polynom
 *************************************/
 polynom& polynom::operator=(const polynom& p)
 {
-	if (this != &p);
+	if (this != &p)
 	{
 		n_ = p.n_;
 		if (coefs_) delete[] coefs_;
 		coefs_ = p.GetCoefs();
+		return *this;
 	}
 	return *this;
 }
@@ -212,7 +213,7 @@ int InnerProduct(polynom& p, polynom& q)
 		for (int j = q.GetOrder(); 0 <= j; j--) {
 			calc = calc + (static_cast<float>(p.coefs_[i]) * static_cast<float>(q.coefs_[j])) / (i + j + 1);
 		}
-	return calc;
+	return static_cast<int>(calc);
 }
 
 /************************************
@@ -236,9 +237,9 @@ Return Value: An integer with the result
 int SqDistance(polynom& p, polynom& q)
 {
 	if (p.GetOrder() > q.GetOrder())
-		return sqrt(SqNorm(p - q));
+		return  static_cast<int>(sqrt(SqNorm(p - q)));
 	else
-		return sqrt(SqNorm(q - p));
+		return  static_cast<int>(sqrt(SqNorm(q - p)));
 }
 
 /*

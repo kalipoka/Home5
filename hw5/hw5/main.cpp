@@ -216,7 +216,6 @@ int main() {
 	cout << SqDistance(complex2_list[lhs],complex2_list[rhs]) << endl;
     }
   }
-  
   if(polynom_list) delete[] polynom_list ;
   if(int3_list) delete[] int3_list;
   if(complex2_list) delete[] complex2_list;

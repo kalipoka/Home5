@@ -1,7 +1,6 @@
 #include <iostream>
-#include <vector> // for debug only
 #include "complex.H"
-#include "TempVec.H"
+//#include "TempVec.H"
 
 using std::cout;
 
