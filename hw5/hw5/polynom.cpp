@@ -1,7 +1,7 @@
 #include "polynom.h"
 #include <string>
 #include <iostream>
-#include "TempVec.H"
+
 
 
 /************************************
@@ -44,7 +44,7 @@ Return Value: -
 *************************************/
 polynom::~polynom()
 {
-	delete[n_] coefs_;
+	delete[] coefs_;
 }
 
 /************************************
@@ -160,42 +160,41 @@ ostream& operator<<(ostream& os, const polynom& p)
 		if (p.coefs_[i] != 0)
 		{
 			if (p.coefs_[i] == 1)
-				s = s + "x^" + to_string(i);
+				os << "x^" << i;
 			else if (p.coefs_[i] == -1)
-				s = s + "x^" + to_string(i);
+				os << "x^"  <<i;
 			else
-				s = s + to_string(p.coefs_[i]) + "x^" + to_string(i);
+				os << p.coefs_[i] << "x^" << i;
 
 			int j = i - 1;
 			while (j-- >= 0)
-				if (p.coefs_[j] >= 0)
+				if (p.coefs_[j] > 0)
 				{
-					s = s + "+";
+					os << "+";
 					break;
 				}
 		}
 	}
 
 	if (i == 1) {
-		if (p.coefs_[i] != 0)
+		if (p.coefs_[1] != 0)
 		{
-			if (p.coefs_[i] != 1 && p.coefs_[i] != -1)
-				s = s + to_string(p.coefs_[i]) + "x";
+			if (p.coefs_[1] != 1 && p.coefs_[1] != -1)
+				os << p.coefs_[i] << "x";
 			else
 				if (p.coefs_[i] == -1)
-					s = s + "-x";
+					os << "-x";
 				else
-					s = s + "x";
+					os << "x";
 
-			if (p.coefs_[i - 1] > 0)
-				s = s + "+";
+			if (p.coefs_[0] > 0)
+				os << "+";
 		}
 		i--;
 	}
 	if (p.coefs_[i] != 0)
-		s = s + to_string(p.coefs_[i]);
+		os << p.coefs_[i];
 
-	os << s;
 	return os;
 }
 
@@ -208,6 +207,7 @@ Return Value: An integer with the result
 *************************************/
 int InnerProduct(polynom& p, polynom& q)
 {
+
 	float calc = .0;
 	for (int i = p.GetOrder(); 0 <= i; i--)
 		for (int j = q.GetOrder(); 0 <= j; j--) {
@@ -236,11 +236,17 @@ Return Value: An integer with the result
 *************************************/
 int SqDistance(polynom& p, polynom& q)
 {
-	if (p.GetOrder() > q.GetOrder())
-		return  static_cast<int>(sqrt(SqNorm(p - q)));
-	else
-		return  static_cast<int>(sqrt(SqNorm(q - p)));
+	if (p.GetOrder() > q.GetOrder()) {
+		polynom j = p - q;
+		return  static_cast<int>(sqrt(SqNorm(j)));
+	}
+	else {
+		polynom j = q - p;
+		return  static_cast<int>(sqrt(SqNorm(j)));
+	}
 }
+
+
 
 /*
 int main()

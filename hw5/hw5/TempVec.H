@@ -2,9 +2,10 @@
 #define _TEMPVEC_H
 
 #include <iostream>
-//#include "complex.H"
+#include "complex.h"
 
 using namespace std;
+
 
 template <class T,int size>
 
@@ -17,7 +18,8 @@ class TempVec {
 	 T& operator[](int i);
 	 TempVec<T, size> operator+(const TempVec<T, size>& rhs);
 	 TempVec<T, size> operator-(const TempVec<T, size>& rhs);
-	 friend ostream& operator<< <>(ostream& os, const TempVec<T, size>& c);
+	 template<class t, int s>
+	 friend ostream& operator<< (ostream& os, const TempVec<t, s>& c);
 	// friend TempVec<T, size> operator* (T c, const TempVec<T, size>& rhs);
 	 T coordinates_[size];
  protected:
@@ -104,7 +106,7 @@ TempVec<T, size>& TempVec<T, size>::operator=(const TempVec<T,size>& rhs)
 	}
 	return *this;
 }
-
+//
 
 /************************************
 Function Name:  operator +
@@ -175,17 +177,17 @@ Description: print operator for TempVec
 Parameters: ostream& os, const TempVec<T, size>& rhs
 Return Value: ostream& os
 *************************************/
-template <class T, int size>
-ostream& operator<< <>(ostream& os, const TempVec<T, size>& rhs)
+template <class t, int s>
+ostream& operator<< (ostream& os, const TempVec<t, s>& rhs)
 {
 	int i = 0;
 
-	while (i < size)
+	while (i < s)
 	{
 		if (i == 0)
 			cout << "(";
 
-		if ( i== size -1)
+		if ( i== s -1)
 			return os << rhs.coordinates_[i] << ")";
 		else
 			cout << rhs.coordinates_[i] << ",";

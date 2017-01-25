@@ -30,14 +30,14 @@ ostream& operator<<(ostream&, const complex& );
 complex operator+(const complex& , const complex& );
 complex operator-(const complex& , const complex& );
 complex operator*(const complex&, const complex&);
-complex SqNorm(complex );
-complex SqNorm(complex );
-complex SqDistance(complex, complex);
+complex SqNorm(const complex );
+complex SqNorm(const complex );
+complex SqDistance(const complex, const complex);
 
 
-int InnerProduct(int, int);
-int SqNorm(int);
-int SqDistance(int,int);
+int InnerProduct(const int&,const int&);
+int SqNorm(const int&);
+int SqDistance(const int&, const int&);
 
 
 #endif

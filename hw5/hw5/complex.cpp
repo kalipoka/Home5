@@ -1,5 +1,5 @@
 #include <iostream>
-#include "complex.H"
+#include "complex.h"
 //#include "TempVec.H"
 
 using std::cout;
@@ -204,7 +204,7 @@ Parameters: complex - x,y
 Return Value: complex innerP
 *************************************/
 
-complex InnerProduct(complex x,complex y)
+complex InnerProduct(const complex x,const complex y)
 {
 	complex innerP;
 	innerP = x*conj(y);
@@ -217,7 +217,7 @@ Description: returns the square norm
 Parameters: complex - x
 Return Value: complex squarenorm
 *************************************/
-complex SqNorm(complex x)
+complex SqNorm(const complex x)
 {
 	complex Snorm;
 	Snorm = x*conj(x);
@@ -230,7 +230,7 @@ Description: returns the square distance
 Parameters: complex - x,y
 Return Value: complex Dist
 *************************************/
-complex SqDistance(complex x, complex y)
+complex SqDistance(const complex x, const complex y)
 {
 	int Dist;
 	complex tmp;
@@ -239,15 +239,17 @@ complex SqDistance(complex x, complex y)
 	return tmp;
 }
 
-int InnerProduct(int x, int y)
+int InnerProduct(const int& x, const int& y)
 {
 	return x*y;
 }
-int SqNorm(int x)
+
+int SqNorm(const int& x)
 {
 	return x*x;
 }
-int SqDistance(int x, int y)
+
+int SqDistance(const int& x, const int& y)
 {
 	return (x - y)*(x - y);
 }

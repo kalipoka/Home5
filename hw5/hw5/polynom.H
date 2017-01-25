@@ -2,10 +2,14 @@
 #define _POLY_F
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 #include <string>
 #include <ostream>
+#include <cmath>
+#include "TempVec.h"
 
-using namespace std;
+
+//using namespace std;
 
 // first number is the size of the polynom and then the numbers
 
@@ -37,5 +41,8 @@ polynom operator+(polynom& p, polynom& q);
 int InnerProduct(polynom& p, polynom& q); // from 1 to 0
 int SqNorm(polynom& p);
 int SqDistance(polynom& p, polynom& q);
+
+
+
 #endif
 
