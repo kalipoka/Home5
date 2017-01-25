@@ -16,36 +16,21 @@ polynom::polynom()
 	coefs_ = NULL;
 	n_ = 0;
 }
+
+
 /************************************
 Function Name: polynom
 Description: Copy Constructor for the polynom class.
-Parameters: int re - real part of the number
-int im - imaginary part of the number
-Return Value: -
+Parameters: p polynom
+Return Value: a new polynom
 *************************************/
-//polynom::polynom(const polynom& p)
-	//:n_(p.n_), coefs_(p.GetCoefs()) {}
-
-polynom::polynom(const polynom& p):n_(p.n_)
+polynom::polynom(const polynom& p):n_(p.n_) 
 {
-	copy(p);
-}
-
-/************************************
-Function Name: polynom
-Description: Default Constructor for the polynom class.
-Parameters: int n - oreder of the polynom
-int* coefs - the list of coefficients
-Return Value: -
-*************************************/
-void polynom::copy(const polynom& p)
-{
-	n_=p.n_;
 	coefs_ = new int[n_ + 1];
 	for (int i = 0; i < n_ + 1; i++)
 		coefs_[i] = p.coefs_[i];
-
 }
+
 
 /************************************
 Function Name: polynom
@@ -56,6 +41,7 @@ Return Value: -
 *************************************/
 polynom::polynom(int n, int* coefs)
 {
+	coefs_ = NULL;
 	if (coefs) {
 		coefs_ = new int[n + 1];
 		for (int i = 0; i <= n; i++)
@@ -110,7 +96,7 @@ polynom& polynom::operator=(const polynom& p)
 	{
 		n_ = p.n_;
 		int j = n_ + 1;
-		if (coefs_) delete[] coefs_;
+		delete[] coefs_;
 		coefs_ = p.GetCoefs();
 	}
 	return *this;
@@ -140,11 +126,29 @@ Return Value: A substructed polynom
 *************************************/
 polynom operator-(polynom& p, polynom& q)
 {
-	int* coefs = p.GetCoefs(); //we need plus one for the free variable
-	for (int i = 0; i <= q.GetOrder(); i++)
-		coefs[i] = coefs[i] - q.coefs_[i];
+	if (!p.coefs_ || !q.coefs_) {
+		polynom r(0, NULL);
+		return r;
+	}
+	int size = 0;
+	int* coefs = NULL;
 
-	polynom r(p.GetOrder(), coefs);
+	if (p.GetOrder() > q.GetOrder()) {
+		coefs = p.GetCoefs();
+		for (int i = 0; i <= q.GetOrder(); i++)
+			coefs[i] = coefs[i] - q.coefs_[i];
+		size = p.GetOrder();
+	}
+	else {
+		coefs = q.GetCoefs();
+		for (int i = 0; i <= p.GetOrder(); i++) //till 
+			coefs[i] = -coefs[i] + p.coefs_[i];
+		for (int i = p.GetOrder() + 1; i <= q.GetOrder(); i++)
+			coefs[i] = -coefs[i];
+		size = q.GetOrder();
+	}
+	polynom r(size, coefs);
+	delete[] coefs;
 	return r;
 }
 
@@ -157,11 +161,28 @@ Return Value: A substructed polynom
 *************************************/
 polynom operator+(polynom& p, polynom& q)
 {
-	int* coefs = p.GetCoefs(); //we need plus one for the free variable
-	for (int i = 0; i <= q.GetOrder(); i++)
-		coefs[i] = coefs[i] + q.coefs_[i];
+	if (!p.coefs_ || !q.coefs_) {
+		polynom r(0, NULL);
+		return r;
+	}
 
-	polynom r(p.GetOrder(), coefs);
+	int size = 0;
+	int* coefs = NULL;
+
+	if (p.GetOrder() > q.GetOrder()) {
+		coefs = p.GetCoefs();
+		for (int i = 0; i <= q.GetOrder(); i++)
+			coefs[i] = coefs[i] + q.coefs_[i];
+		size = p.GetOrder();
+	}
+	else {
+		coefs = q.GetCoefs();
+		for (int i = 0; i <= p.GetOrder(); i++) //till 
+			coefs[i] = coefs[i] + p.coefs_[i];
+		size = q.GetOrder();
+	}
+	polynom r(size, coefs);
+	delete[] coefs;
 	return r;
 }
 
@@ -177,27 +198,33 @@ ostream& operator<<(ostream& os, const polynom& p)
 {
 	if (!p.coefs_)
 		return os;
-
-	int i = p.n_;
+	
+	int i = p.n_, flag=0;
 	for (; 2 <= i; i--)
 	{
 		if (p.coefs_[i] != 0)
 		{
-			if (p.coefs_[i] == 1)
+			if (p.coefs_[i] == 1) {
 				os << "x^" << i;
-			else if (p.coefs_[i] == -1)
+				flag = 1;
+			}
+			else if (p.coefs_[i] == -1){
 				os << "x^"  <<i;
-			else
+				flag = 1;
+			}
+			else{
 				os << p.coefs_[i] << "x^" << i;
-
-			int j = i - 1;
-			while (j-- >= 0) {
+				flag = 1;
+			}
+			int j = i-1;
+			while (j >= 0) {
 				if (p.coefs_[j] != 0)
 				{
 					if (p.coefs_[j] > 0)
 						os << "+";
 					break;
 				}
+				j--;
 			}
 		}
 	}
@@ -205,13 +232,19 @@ ostream& operator<<(ostream& os, const polynom& p)
 	if (i == 1) {
 		if (p.coefs_[1] != 0)
 		{
-			if (p.coefs_[1] != 1 && p.coefs_[1] != -1)
+			if (p.coefs_[1] != 1 && p.coefs_[1] != -1){
 				os << p.coefs_[i] << "x";
+				flag = 1;
+			}
 			else
-				if (p.coefs_[i] == -1)
+				if (p.coefs_[i] == -1){
 					os << "-x";
-				else
+					flag = 1;
+				}
+				else{
 					os << "x";
+					flag = 1;
+				}
 			if (p.coefs_[0] > 0)
 				os << "+";
 		}
@@ -223,6 +256,10 @@ ostream& operator<<(ostream& os, const polynom& p)
 				os << p.coefs_[0];
 			else
 				os << "-" << abs(p.coefs_[0]);
+		}
+		else{
+			if (flag ==0)
+				os << "0";
 		}
 
 	return os;
@@ -268,11 +305,11 @@ int SqDistance(polynom& p, polynom& q)
 {
 	if (p.GetOrder() > q.GetOrder()) {
 		polynom j = p - q;
-		return  static_cast<int>(sqrt(SqNorm(j)));
+		return  static_cast<int>(SqNorm(j));
 	}
 	else {
 		polynom j = q - p;
-		return  static_cast<int>(sqrt(SqNorm(j)));
+		return  static_cast<int>(SqNorm(j));
 	}
 }
 

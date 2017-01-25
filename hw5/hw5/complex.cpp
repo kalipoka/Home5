@@ -246,12 +246,12 @@ int InnerProduct(const int& x, const int& y)
 
 int SqNorm(const int& x)
 {
-	return x*x;
+	return InnerProduct(x,x);
 }
 
 int SqDistance(const int& x, const int& y)
 {
-	return (x - y)*(x - y);
+	return SqNorm(x-y);
 }
 
 /*

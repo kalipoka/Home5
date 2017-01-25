@@ -42,36 +42,13 @@ TempVec<T, size>::TempVec(const TempVec<T,size>& rhs)
 	}
 }
 
-/*
-template <class T, int size>
-int InnerProduct(int x, int y)
-{
-	int innerP;
-	innerP = x*y;
-	return innerP;
-}
-template <class T, int size>
-int SqNorm(int x)
-{
-	int Snorm;
-	Snorm = x*x;
-	return Snorm;
-}
-template <class T, int size>
-int SqDistance(int x, int y)
-{
-	int Dist;
-	Dist = ((x - y)*(x - y));
-	return Dist;
-}
-*/
+
 /************************************
 Function Name:  operator []
 Description: Operator for putting values inside the vector;
 Parameters: int i  - the coordinate we want to assing
 Return Value: -
 *************************************/
-// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4exception not working yet - it still goes to undifined memory
 template <class T, int size>
 T& TempVec<T, size>::operator[](int i)
 {
@@ -249,7 +226,7 @@ template <class T, int size>
 T SqDistance(const TempVec<T, size>& lhs, const TempVec<T, size>& rhs)
 {
 	T tmp = SqDistance(lhs.coordinates_[0], rhs.coordinates_[0]);
-	int i = 0;
+	int i = 1;
 	while (i < size)
 	{
 		tmp = tmp + SqDistance(lhs.coordinates_[i], rhs.coordinates_[i]);
