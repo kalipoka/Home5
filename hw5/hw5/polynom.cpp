@@ -16,6 +16,20 @@ polynom::polynom()
 	coefs_ = NULL;
 	n_ = 0;
 }
+/************************************
+Function Name: polynom
+Description: Copy Constructor for the polynom class.
+Parameters: int re - real part of the number
+int im - imaginary part of the number
+Return Value: -
+*************************************/
+//polynom::polynom(const polynom& p)
+	//:n_(p.n_), coefs_(p.GetCoefs()) {}
+
+polynom::polynom(const polynom& p):n_(p.n_)
+{
+	copy(p);
+}
 
 /************************************
 Function Name: polynom
@@ -24,12 +38,26 @@ Parameters: int n - oreder of the polynom
 int* coefs - the list of coefficients
 Return Value: -
 *************************************/
-polynom::polynom(int n = 0, int* coefs = NULL)
+void polynom::copy(const polynom& p)
 {
-	//coefs_ = coefs;
-	coefs_ = new int[n + 1];
+	n_=p.n_;
+	coefs_ = new int[n_ + 1];
+	for (int i = 0; i < n_ + 1; i++)
+		coefs_[i] = p.coefs_[i];
+
+}
+
+/************************************
+Function Name: polynom
+Description: Default Constructor for the polynom class.
+Parameters: int n - oreder of the polynom
+int* coefs - the list of coefficients
+Return Value: -
+*************************************/
+polynom::polynom(int n, int* coefs)
+{
 	if (coefs) {
-		new int[n + 1];
+		coefs_ = new int[n + 1];
 		for (int i = 0; i <= n; i++)
 			coefs_[i] = coefs[i];
 	}
@@ -47,15 +75,7 @@ polynom::~polynom()
 	delete[] coefs_;
 }
 
-/************************************
-Function Name: polynom
-Description: Copy Constructor for the polynom class.
-Parameters: int re - real part of the number
-int im - imaginary part of the number
-Return Value: -
-*************************************/
-polynom::polynom(const polynom& p)
-	:n_(p.n_), coefs_(p.GetCoefs()) {}
+
 
 
 /************************************
@@ -66,13 +86,16 @@ Return Value: coefs - a pointer to the list
 *************************************/
 int* polynom::GetCoefs() const
 {
-	int* coefs;
 	if (!coefs_)
 		return NULL;
-	coefs = new int[n_ + 1];
+
+	int* new_coefs = NULL;
+	int j = n_ + 1;
+	new_coefs = new int[j];
+
 	for (int i = 0; i <= n_; i++)
-		coefs[i] = coefs_[i];
-	return coefs;
+		new_coefs[i] = coefs_[i];
+	return new_coefs;
 }
 
 /************************************
@@ -86,9 +109,9 @@ polynom& polynom::operator=(const polynom& p)
 	if (this != &p)
 	{
 		n_ = p.n_;
+		int j = n_ + 1;
 		if (coefs_) delete[] coefs_;
 		coefs_ = p.GetCoefs();
-		return *this;
 	}
 	return *this;
 }
@@ -152,9 +175,10 @@ Return Value: the stream so can be concatenate to other stream.
 *************************************/
 ostream& operator<<(ostream& os, const polynom& p)
 {
-	string s = "";
+	if (!p.coefs_)
+		return os;
+
 	int i = p.n_;
-	//if (p.coefs_) return os;
 	for (; 2 <= i; i--)
 	{
 		if (p.coefs_[i] != 0)
@@ -167,12 +191,14 @@ ostream& operator<<(ostream& os, const polynom& p)
 				os << p.coefs_[i] << "x^" << i;
 
 			int j = i - 1;
-			while (j-- >= 0)
-				if (p.coefs_[j] > 0)
+			while (j-- >= 0) {
+				if (p.coefs_[j] != 0)
 				{
-					os << "+";
+					if (p.coefs_[j] > 0)
+						os << "+";
 					break;
 				}
+			}
 		}
 	}
 
@@ -186,14 +212,18 @@ ostream& operator<<(ostream& os, const polynom& p)
 					os << "-x";
 				else
 					os << "x";
-
 			if (p.coefs_[0] > 0)
 				os << "+";
 		}
 		i--;
 	}
-	if (p.coefs_[i] != 0)
-		os << p.coefs_[i];
+	if (i == 0)
+		if (p.coefs_[0] != 0) {
+			if (p.coefs_[0] > 0)
+				os << p.coefs_[0];
+			else
+				os << "-" << abs(p.coefs_[0]);
+		}
 
 	return os;
 }

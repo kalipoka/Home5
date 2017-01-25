@@ -15,7 +15,7 @@
 
 class polynom {
 private:
-
+	void copy(const polynom& p);
 public:
 	polynom(int n, int* coefs);
 	polynom();
@@ -24,6 +24,7 @@ public:
 	int GetOrder() { return this->n_; }
 	int* GetCoefs() const; //get a COPY of coefs;
 	polynom& operator=(const polynom& p);
+	
 	friend polynom operator*(const int i, polynom& a);
 	friend polynom operator-(polynom& p, polynom& q);
 	friend polynom operator+(polynom& p, polynom& q);
